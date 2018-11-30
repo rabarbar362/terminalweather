@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="terminalweather_main">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/terminalweather_main_jar/terminalweather_main.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

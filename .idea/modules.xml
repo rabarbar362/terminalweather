@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/terminalweather.iml" filepath="$PROJECT_DIR$/.idea/modules/terminalweather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/terminalweather_main.iml" filepath="$PROJECT_DIR$/.idea/modules/terminalweather_main.iml" group="terminalweather" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/terminalweather_test.iml" filepath="$PROJECT_DIR$/.idea/modules/terminalweather_test.iml" group="terminalweather" />
+    </modules>
+  </component>
+</project>
