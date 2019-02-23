@@ -6,7 +6,7 @@ public class Main {
 
     private static void currentWeather(WeatherData weatherData) {
         CurrentWeather currentWeather = new CurrentWeather(weatherData.getCurrentWeather());
-        currentWeather.printCurrentWeather();
+        System.out.println(currentWeather);
     }
 
     private static void forecastWeather(WeatherData weatherData) {
@@ -17,13 +17,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         int numberOfDays;
+        UserIPAddress IPAddress = new UserIPAddress();
+        System.out.println("Your IP address is: " + IPAddress.getIPAddress());
+        UserLocation userLocation = new UserLocation(IPAddress.getIPAddress());
 
         if (args.length > 0) {
             try {
                 numberOfDays = Integer.parseInt(args[0]);
-                UserIPAddress IPAddress = new UserIPAddress();
-                System.out.println("Your IP address is: " + IPAddress.getIPAddress());
-                UserLocation userLocation = new UserLocation(IPAddress.getIPAddress());
 
                 if (numberOfDays > 7) {
                     WeatherData data = new WeatherData(userLocation.getLatitude(), userLocation.getLongitude(),numberOfDays);
@@ -38,10 +38,12 @@ public class Main {
                     currentWeather(data);
                     forecastWeather(data);
                 }
-
             } catch (NumberFormatException e) {
                 System.out.println("Invalid arguments.");
             }
+        } else {
+            WeatherData data = new WeatherData(userLocation.getLatitude(), userLocation.getLongitude(),0);
+            currentWeather(data);
         }
     }
 }

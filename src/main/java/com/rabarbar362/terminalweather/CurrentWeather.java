@@ -24,14 +24,13 @@ public class CurrentWeather {
 
     }
 
-    public void printCurrentWeather() {
-        System.out.println("Last updated: " + lastUpdatedDate + ".");
-        System.out.println(conditionsDescription + ".");
-        System.out.println("The temperature is " + tempC + " Celsius, but it feels like " + feelsLike + " Celsius.");
-        System.out.println("The wind blows with the speed of " + windKph + " kph in the " + windDirection + " direction.");
-        System.out.println("The pressure equals " + pressureMb + " mb.");
-        System.out.println("Clouds cover " + cloudCover + "% of the sky.");
-        System.out.println("Humidity: " + humidity +"%, precipitation: " + precipitationMm + " mm.");
-        System.out.println();
+    @Override
+    public String toString() {
+        return "Last updated: " + lastUpdatedDate + ".\n" + conditionsDescription + ".\n" +
+                "The temperature is " + tempC + " Celsius, but it feels like " + feelsLike + " Celsius.\n" +
+                "The wind blows with the speed of " + windKph + " kph in the " + windDirection + " direction.\n" +
+                "The pressure equals " + pressureMb + " mb.\n" +
+                "Clouds cover " + cloudCover + "% of the sky.\n" +
+                "Humidity: " + humidity +"%, precipitation: " + precipitationMm + " mm.\n";
     }
 }

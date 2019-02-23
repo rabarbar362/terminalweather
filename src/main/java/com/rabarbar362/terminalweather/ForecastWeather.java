@@ -5,7 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class ForecastWeather {
-    private static final double DAYS_IN_ONE_ROW = 3.0;
+    private static final int DAYS_IN_ONE_ROW = 3;
+    private int printedDays = 0;
     private JsonArray forecastJsonArray;
     private JsonElement day;
     private String[][] forecast;
@@ -57,190 +58,46 @@ public class ForecastWeather {
         return forecastArray;
     }
 
-    //TODO printing the forecast properly, 3 days in one row
     public void printForecast() {
         String[][] forecastW = prepareToPrint();
-
-        int rowsOfDays = (int) Math.ceil(forecastJsonArray.size() / DAYS_IN_ONE_ROW);
-
-
-        for (int t=0; t < rowsOfDays; t++) {
-
-            for (int j = 3*t; j < forecastJsonArray.size(); j++) {
-                System.out.format("%-32s" + "|  ", "------------------------------");
-            }
-            System.out.println();
-
-            for (int j = 3*t; j < forecastJsonArray.size(); j++) {
-                System.out.format("%-32s" + "|  ", forecastW[0][j]);
-            }
-
-            System.out.println();
-
-            for (int j = 3*t; j < forecastJsonArray.size(); j++) {
-                System.out.format("%-32s" + "|  ", "------------------------------");
-            }
-            System.out.println();
-
-            for (int i = 1; i < forecastW.length; i++) {
-                for (int j = 3*t; j < forecastJsonArray.size(); j++) {
-                    System.out.format("%-32s" + "|  ", forecastW[i][j]);
-                }
-                System.out.println();
-            }
-            System.out.println();
-
+        int numberOfRows = forecastJsonArray.size() / DAYS_IN_ONE_ROW;
+        while (numberOfRows > 0) {
+            print(forecastW, DAYS_IN_ONE_ROW);
+            numberOfRows--;
+            printedDays += 3;
         }
 
+        int restOfDays = forecastJsonArray.size() % DAYS_IN_ONE_ROW;
+        if (restOfDays > 0) {
+            print(forecastW, restOfDays);
+        }
 
-       /* for (int j = 0; j < 3; j++) {
+    }
+
+    private void print(String[][] forecastW, int daysToPrint) {
+        for (int j = 0; j < daysToPrint; j++) {
             System.out.format("%-32s" + "|  ", "------------------------------");
         }
         System.out.println();
 
-        for (int j = 0; j < 3; j++) {
-            System.out.format("%-32s" + "|  ", forecastW[0][j]);
+        for (int j = 0; j < daysToPrint; j++) {
+            System.out.format("%-32s" + "|  ", forecastW[0][printedDays + j]);
         }
 
         System.out.println();
 
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < daysToPrint; j++) {
             System.out.format("%-32s" + "|  ", "------------------------------");
         }
         System.out.println();
 
         for (int i = 1; i < forecastW.length; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.format("%-32s" + "|  ", forecastW[i][j]);
+            for (int j = 0; j < daysToPrint; j++) {
+                System.out.format("%-32s" + "|  ", forecastW[i][printedDays + j]);
             }
             System.out.println();
         }
         System.out.println();
-
-
-
-
-
-
-
-            for (int j = 3; j < 6; j++) {
-                System.out.format("%-32s" + "|  ", "------------------------------");
-            }
-            System.out.println();
-
-            for (int j = 3; j < 6; j++) {
-                System.out.format("%-32s" + "|  ", forecastW[0][j]);
-            }
-
-            System.out.println();
-
-            for (int j = 3; j < 6; j++) {
-                System.out.format("%-32s" + "|  ", "------------------------------");
-            }
-            System.out.println();
-
-            for (int x = 1; x < forecastW.length; x++) {
-                for (int j = 3; j < 6; j++) {
-                    System.out.format("%-32s" + "|  ", forecastW[x][j]);
-                }
-                System.out.println();
-            }
-        System.out.println();
-
-
-
-
-                for (int j = 6; j < 7; j++) {
-                    System.out.format("%-32s" + "|  ", "------------------------------");
-                }
-                System.out.println();
-
-                for (int j = 6; j < 7; j++) {
-                    System.out.format("%-32s" + "|  ", forecastW[0][j]);
-                }
-
-                System.out.println();
-
-                for (int j = 6; j < 7; j++) {
-                    System.out.format("%-32s" + "|  ", "------------------------------");
-                }
-                System.out.println();
-
-                for (int x = 1; x < forecastW.length; x++) {
-                    for (int j = 6; j < 7; j++) {
-                        System.out.format("%-32s" + "|  ", forecastW[x][j]);
-                    }
-                    System.out.println();
-                }*/
-
-
-
-        /*
-        int rowsOfDays = (int) Math.ceil(forecastJsonArray.size() / DAYS_IN_ONE_ROW);
-        int currentIndex;
-
-        for (int q = 0; q < rowsOfDays; q++) {
-
-            String[][] forecast3Days = new String[9][3];
-
-            for (currentIndex = 0; currentIndex < forecastJsonArray.size();currentIndex++){
-
-
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        forecast3Days[i][j] = forecastW[i][currentIndex];
-                    }
-                }
-
-                for (int j = 0; j < forecast3Days[0].length; j++) {
-                    System.out.format("%-32s" + "|  ", "------------------------------");
-                }
-                System.out.println();
-
-                for (int j = 0; j < forecast3Days[0].length; j++) {
-                    System.out.format("%-32s" + "|  ", forecast3Days[0][currentIndex]);
-                }
-
-                System.out.println();
-
-                for (int j = 0; j < forecast3Days[0].length; j++) {
-                    System.out.format("%-32s" + "|  ", "------------------------------");
-                }
-                System.out.println();
-
-                for (int i = 1; i < forecast3Days.length; i++) {
-                    for (int j = 0; j < forecast3Days[i].length; j++) {
-                        System.out.format("%-32s" + "|  ", forecast3Days[i][currentIndex]);
-                    }
-                    System.out.println();
-                }
-            }
-        }
-
-       int rowsOfDays = (int) Math.ceil(forecastJsonArray.size()/DAYS_IN_ONE_ROW);
-
-        for (int q = 0; q < rowsOfDays; q++) {
-
-            printHorizontalDivider();
-
-            for (int j = 0; j < DAYS_IN_ONE_ROW; j++) {
-                System.out.format("%-32s" + "|  ", forecastW[0][j]);
-            }
-            System.out.println();
-
-            printHorizontalDivider();
-
-            for (int i = 1; i < forecastW.length; i++) {
-                for (int j = 0; j < DAYS_IN_ONE_ROW; j++) {
-                    System.out.format("%-32s" + "|  ", forecastW[i][j]);
-                }
-                System.out.println();
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
     }
 }
-
 
